@@ -1,0 +1,41 @@
+{% extends 'components/base.html' %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+    <div class="container mx-auto py-8 px-16">
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+            <div class="relative">
+                <!-- Product Image -->
+                <div class="w-full h-72 overflow-hidden">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-full h-full object-contain">
+                </div>
+                <div class="absolute top-4 left-4 text-white bg-opacity-70 bg-black p-2 rounded-lg">
+                    <h1 class="text-3xl font-bold">{{ product.name }}</h1>
+                </div>
+            </div>
+            <div class="p-6">
+                <p class="text-lg text-gray-700 mb-4">{{ product.description }}</p>
+                <p class="text-xl font-semibold text-green-600 mb-4">{{ product.price|floatformat:2 }} USD</p>
+                <p class="text-gray-500 mb-2"><strong>Categoría:</strong> {{ product.category.name }}</p>
+                <p class="text-gray-500 mb-2"><strong>Proveedor:</strong> {{ product.supplier.name }}</p>
+                <p class="text-gray-500 mb-6"><strong>Cantidad en stock:</strong> {{ product.stock_quantity }}</p>
+
+                <!-- Buttons Section (only for superusers) -->
+                {% if user.is_superuser %}
+                    <div class="flex justify-between items-center space-x-4">
+                        <!-- Edit Product -->
+                        <a href="{% url 'catalog:product_update' product.pk %}" class="bg-yellow-500 text-white px-6 py-2 rounded-lg hover:bg-yellow-600 transition-all">Editar Producto</a>
+                        <!-- Delete Product -->
+                        <a href="{% url 'catalog:product_delete' product.pk %}" class="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600 transition-all">Eliminar Producto</a>
+                    </div>
+                {% endif %}
+                
+                <!-- Back to List -->
+                <div class="mt-4">
+                    <a href="{% url 'catalog:catalogo' %}" class="bg-gray-300 text-black px-6 py-2 rounded-lg hover:bg-gray-400 transition-all">Volver a la Lista</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,125 @@
+{% extends 'components/base.html' %}
+{% load static %}
+{% block title %}AgroPlus{% endblock %}
+{% block content %}
+
+<!-- Hero Section -->
+<section class="bg-green-600 text-white py-20">
+    <div class="container mx-auto text-center">
+        <h1 class="text-4xl font-bold mb-4">Bienvenidos al Catálogo Agronómico</h1>
+        <p class="text-lg mb-6">Todo lo que necesitas para el éxito en el campo: fertilizantes, maquinaria, químicos y más.</p>
+        <a href="{% url 'catalog:catalogo' %}" class="bg-white text-green-600 py-3 px-6 rounded-full shadow-md hover:bg-gray-100 transition">
+            Explora el Catálogo
+        </a>
+    </div>
+</section>
+
+<div class="container mx-auto px-4">
+    <section class="py-16 bg-gray-100">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-semibold text-center mb-12">Productos Destacados</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-2xl transition">
+                    <img src="{% static 'img/planta.jpeg' %}" alt="Producto 1" class="w-full h-48 object-cover rounded">
+                    <h3 class="text-xl font-semibold mt-4">Fertilizante Orgánico</h3>
+                    <p class="text-gray-600 mt-2">Mejora la calidad del suelo y aumenta el rendimiento de tus cultivos.</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-2xl transition">
+                    <img src="{% static 'img/planta2.jpg' %}" alt="Producto 1" class="w-full h-48 object-cover rounded">
+                    <h3 class="text-xl font-semibold mt-4">Fertilizante Orgánico</h3>
+                    <p class="text-gray-600 mt-2">Mejora la calidad del suelo y aumenta el rendimiento de tus cultivos.</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-2xl transition">
+                    <img src="{% static 'img/planta3.jpg' %}" alt="Producto 1" class="w-full h-48 object-cover rounded">
+                    <h3 class="text-xl font-semibold mt-4">Fertilizante Orgánico</h3>
+                    <p class="text-gray-600 mt-2">Mejora la calidad del suelo y aumenta el rendimiento de tus cultivos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Lo que Dicen Nuestros Clientes -->
+<section class="bg-white py-16">
+    <div class="container mx-auto text-center">
+        <h2 class="text-3xl font-semibold mb-12">Lo que Dicen Nuestros Clientes</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-12">
+            <div class="bg-gray-100 p-6 rounded-lg shadow-lg">
+                <div class="flex items-center justify-center mb-4">
+                    <img src="{% static 'img/gato.jpg' %}" alt="Juan Pérez" class="w-16 h-16 rounded-full object-cover">
+                </div>
+                <p class="text-gray-700 mb-4">"¡Excelente calidad en los productos y servicio! Mi cosecha ha mejorado muchísimo."</p>
+                <h4 class="text-lg font-semibold text-green-600">Juan Pérez</h4>
+                <p class="text-sm text-gray-500">Agricultor</p>
+            </div>
+
+            <div class="bg-gray-100 p-6 rounded-lg shadow-lg">
+                <div class="flex items-center justify-center mb-4">
+                    <img src="{% static 'img/gato.jpg' %}" alt="Ana Gómez" class="w-16 h-16 rounded-full object-cover">
+                </div>
+                <p class="text-gray-700 mb-4">"Los productos son increíbles, muy eficientes. ¡Los recomiendo ampliamente!"</p>
+                <h4 class="text-lg font-semibold text-green-600">Ana Gómez</h4>
+                <p class="text-sm text-gray-500">Productora</p>
+            </div>
+
+            <div class="bg-gray-100 p-6 rounded-lg shadow-lg">
+                <div class="flex items-center justify-center mb-4">
+                    <img src="{% static 'img/gato.jpg' %}" alt="Carlos Díaz" class="w-16 h-16 rounded-full object-cover">
+                </div>
+                <p class="text-gray-700 mb-4">"Servicio excepcional y productos de calidad. Muy satisfecho con los resultados."</p>
+                <h4 class="text-lg font-semibold text-green-600">Carlos Díaz</h4>
+                <p class="text-sm text-gray-500">Ganadero</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ¿Por Qué Elegirnos? -->
+<section class="bg-green-50 py-16 px-8">
+    <div class="container mx-auto text-center">
+        <h2 class="text-3xl font-semibold mb-8">¿Por Qué Elegirnos?</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="p-6 bg-white rounded-lg shadow-lg hover:shadow-2xl transition">
+                <div class="flex justify-center items-center mb-4">
+                    <!-- Icono de sostenibilidad con Boxicons -->
+                    <i class="bx bx-recycle text-4xl text-green-600"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-green-600">Productos Sostenibles</h3>
+                <p class="text-gray-600 mt-2">Nos preocupamos por el medio ambiente y la calidad de nuestros productos.</p>
+            </div>
+
+            <div class="p-6 bg-white rounded-lg shadow-lg hover:shadow-2xl transition">
+                <div class="flex justify-center items-center mb-4">
+                    <!-- Icono de calidad con Boxicons -->
+                    <i class="bx bxs-check-circle text-4xl text-green-600"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-green-600">Calidad Asegurada</h3>
+                <p class="text-gray-600 mt-2">Contamos con los más altos estándares de calidad en todos nuestros productos.</p>
+            </div>
+
+            <div class="p-6 bg-white rounded-lg shadow-lg hover:shadow-2xl transition">
+                <div class="flex justify-center items-center mb-4">
+                    <!-- Icono de soporte con Boxicons -->
+                    <i class="bx bx-headphone text-4xl text-green-600"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-green-600">Soporte 24/7</h3>
+                <p class="text-gray-600 mt-2">Ofrecemos atención y soporte constante para garantizar tu satisfacción.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="bg-green-600 text-white py-20 mt-16">
+    <div class="container mx-auto text-center">
+        <h2 class="text-3xl font-semibold mb-6">¿Listo para optimizar tu producción agrícola?</h2>
+        <p class="text-lg mb-8">Contáctanos para más información sobre nuestros productos y servicios.</p>
+        <a href="{% url 'catalog:contact' %}" class="bg-white text-green-600 py-3 px-6 rounded-full shadow-md hover:bg-gray-100 transition">
+            Contáctanos
+        </a>
+    </div>
+</section>
+
+{% endblock %}

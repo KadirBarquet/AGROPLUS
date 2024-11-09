@@ -1,0 +1,125 @@
+{% extends 'components/base.html' %}
+
+{% block title %}{% if product.pk %}Editar Producto{% else %}Crear Producto{% endif %}{% endblock %}
+
+{% block content %}
+    <div class="container mx-auto py-8 px-16">
+        <h1 class="text-3xl font-bold mb-6">{% if product.pk %}Editar Producto{% else %}Crear Producto{% endif %}</h1>
+
+        <form method="post" enctype="multipart/form-data" class="space-y-6">
+            {% csrf_token %}
+            
+            <!-- Nombre del Producto -->
+            <div class="mb-6">
+                <label for="id_name" class="block text-lg font-medium">Nombre del Producto</label>
+                <input type="text" name="name" id="id_name" value="{{ form.instance.name|default:'' }}" class="mt-1 block w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" placeholder="Ingrese el nombre del producto" required>
+                {% if form.name.errors %}
+                    <div class="text-red-500 text-sm mt-2">
+                        {% for error in form.name.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Categoría -->
+            <div class="mb-6">
+                <label for="id_category" class="block text-lg font-medium">Categoría</label>
+                <select name="category" id="id_category" class="mt-1 block w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" required>
+                    <option value="">Seleccionar Categoría</option>
+                    {% for category in form.category.field.queryset %}
+                        <option value="{{ category.pk }}" {% if form.instance.category == category %}selected{% endif %}>{{ category.name }}</option>
+                    {% endfor %}
+                </select>
+                {% if form.category.errors %}
+                    <div class="text-red-500 text-sm mt-2">
+                        {% for error in form.category.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Proveedor -->
+            <div class="mb-6">
+                <label for="id_supplier" class="block text-lg font-medium">Proveedor</label>
+                <select name="supplier" id="id_supplier" class="mt-1 block w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" required>
+                    <option value="">Seleccionar Proveedor</option>
+                    {% for supplier in form.supplier.field.queryset %}
+                        <option value="{{ supplier.pk }}" {% if form.instance.supplier == supplier %}selected{% endif %}>{{ supplier.name }}</option>
+                    {% endfor %}
+                </select>
+                {% if form.supplier.errors %}
+                    <div class="text-red-500 text-sm mt-2">
+                        {% for error in form.supplier.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Descripción -->
+            <div class="mb-6">
+                <label for="id_description" class="block text-lg font-medium">Descripción</label>
+                <textarea name="description" id="id_description" class="mt-1 block w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" placeholder="Ingrese una descripción del producto" required>{{ form.instance.description|default:'' }}</textarea>
+                {% if form.description.errors %}
+                    <div class="text-red-500 text-sm mt-2">
+                        {% for error in form.description.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Precio -->
+            <div class="mb-6">
+                <label for="id_price" class="block text-lg font-medium">Precio</label>
+                <input type="number" name="price" id="id_price" value="{{ form.instance.price|default:'' }}" class="mt-1 block w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" placeholder="Ingrese el precio del producto" required step="0.01">
+                {% if form.price.errors %}
+                    <div class="text-red-500 text-sm mt-2">
+                        {% for error in form.price.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Cantidad en Stock -->
+            <div class="mb-6">
+                <label for="id_stock_quantity" class="block text-lg font-medium">Cantidad en Stock</label>
+                <input type="number" name="stock_quantity" id="id_stock_quantity" value="{{ form.instance.stock_quantity|default:'' }}" class="mt-1 block w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" placeholder="Cantidad disponible en stock" required>
+                {% if form.stock_quantity.errors %}
+                    <div class="text-red-500 text-sm mt-2">
+                        {% for error in form.stock_quantity.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Imagen del Producto -->
+            <div class="mb-6">
+                <label for="id_image" class="block text-lg font-medium">Imagen del Producto</label>
+                {% if form.instance.image %}
+                    <div class="mb-4">
+                        <img src="{{ form.instance.image.url }}" alt="Imagen del Producto" class="w-32 h-32 object-cover rounded-lg">
+                    </div>
+                {% endif %}
+                <input type="file" name="image" id="id_image" class="mt-1 block w-full px-4 py-2 border rounded-lg">
+                {% if form.image.errors %}
+                    <div class="text-red-500 text-sm mt-2">
+                        {% for error in form.image.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Botón de Acción -->
+            <div class="flex justify-between items-center">
+                <button type="submit" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-all">Guardar Producto</button>
+                <a href="{% url 'catalog:product_list' %}" class="bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition-all">Cancelar</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

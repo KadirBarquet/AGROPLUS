@@ -1,0 +1,41 @@
+{% extends 'components/base.html' %}
+
+{% block title %}Menú Catálogo Agronómico{% endblock %}
+
+{% block content %}
+<main class="container mx-auto p-8">
+    <h1 class="text-3xl font-bold text-center mb-8">Menú Catálogo</h1>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Card para Categorías -->
+        <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
+            <i class="bx bxs-category text-4xl text-green-700 mb-4"></i>
+            <h3 class="text-xl font-semibold text-green-700 mb-2">Categorías</h3>
+            <p class="text-center mb-4">Gestiona las categorías de productos disponibles en el catálogo.</p>
+            <a href="{% url 'catalog:category_list' %}" class="text-green-700 hover:text-white border border-green-700 hover:bg-green-700 px-4 py-2 rounded-full transition-all duration-200">
+                Ver Categorías
+            </a>
+        </div>
+
+        <!-- Card para Proveedores -->
+        <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
+            <i class="bx bxs-buildings text-4xl text-green-700 mb-4"></i>
+            <h3 class="text-xl font-semibold text-green-700 mb-2">Proveedores</h3>
+            <p class="text-center mb-4">Consulta los proveedores asociados a los productos de tu catálogo.</p>
+            <a href="{% url 'catalog:supplier_list' %}" class="text-green-700 hover:text-white border border-green-700 hover:bg-green-700 px-4 py-2 rounded-full transition-all duration-200">
+                Ver Proveedores
+            </a>
+        </div>
+
+        <!-- Card para Productos -->
+        <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
+            <i class="bx bxs-coupon text-4xl text-green-700 mb-4"></i>
+            <h3 class="text-xl font-semibold text-green-700 mb-2">Productos</h3>
+            <p class="text-center mb-4">Visualiza los productos disponibles, sus detalles y disponibilidad.</p>
+            <a href="{% url 'catalog:product_list' %}" class="text-green-700 hover:text-white border border-green-700 hover:bg-green-700 px-4 py-2 rounded-full transition-all duration-200">
+                Ver Productos
+            </a>
+        </div>
+    </div>
+</main>
+{% endblock %}

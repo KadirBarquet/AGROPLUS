@@ -1,0 +1,50 @@
+{% extends 'components/base.html' %}
+
+{% block title %}{% if form.instance.pk %}Editar Categoría{% else %}Crear Nueva Categoría{% endif %}{% endblock %}
+
+{% block content %}
+    <div class="container mx-auto py-8 px-16">
+        <h1 class="text-3xl font-bold mb-6">{% if form.instance.pk %}Editar Categoría{% else %}Crear Nueva Categoría{% endif %}</h1>
+        
+        <form method="post" class="space-y-6">
+            {% csrf_token %}
+
+            <!-- Nombre de la Categoría -->
+            <div class="mb-4">
+                <label for="{{ form.name.id_for_label }}" class="block text-lg font-medium">Nombre de la Categoría</label>
+                <input type="text" name="name" id="{{ form.name.id_for_label }}" value="{{ form.instance.name }}" placeholder="Ingresa el nombre de la categoría" class="mt-1 block w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" required>
+                {% if form.name.errors %}
+                    <div class="text-red-500 text-sm mt-2">
+                        {% for error in form.name.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Descripción de la Categoría -->
+            <div class="mb-4">
+                <label for="{{ form.description.id_for_label }}" class="block text-lg font-medium">Descripción</label>
+                <textarea name="description" id="{{ form.description.id_for_label }}" rows="4" placeholder="Ingresa una breve descripción de la categoría" class="mt-1 block w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500">{{ form.instance.description|default:'' }}</textarea>
+                {% if form.description.errors %}
+                    <div class="text-red-500 text-sm mt-2">
+                        {% for error in form.description.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Botones de acción -->
+            <div class="flex justify-between">
+                <!-- Botón de Guardar -->
+                <button type="submit" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-all">Guardar</button>
+
+                <!-- Botón de Cancelar -->
+                <a href="{% url 'catalog:category_list' %}" class="bg-gray-300 text-black px-6 py-2 rounded-lg hover:bg-gray-400 transition-all">
+                    Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

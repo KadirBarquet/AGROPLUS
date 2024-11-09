@@ -1,0 +1,44 @@
+{% extends 'components/base.html' %}
+
+{% block title %}Lista de Productos{% endblock %}
+
+{% block content %}
+    <div class="container mx-auto py-8 px-16">
+        <h1 class="text-3xl font-bold mb-6">Lista de Productos</h1>
+        
+        <div class="mb-6">
+            <a href="{% url 'catalog:product_create' %}" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-all">Crear Nuevo Producto</a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {% for product in page_obj %}
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h2 class="text-xl font-semibold">{{ product.name }}</h2>
+                        <p class="text-gray-500">{{ product.description|truncatewords:20 }}</p>
+                        <p class="text-green-600 font-bold">{{ product.price|floatformat:2 }}</p>
+                        <div class="flex justify-between mt-4">
+                            <a href="{% url 'catalog:product_detail' product.pk %}" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Ver Detalles</a>
+                            <a href="{% url 'catalog:product_update' product.pk %}" class="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600">Editar</a>
+                            <a href="{% url 'catalog:product_delete' product.pk %}" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">Eliminar</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Pagination -->
+        <div class="mt-6">
+            {% if page_obj.has_previous %}
+                <a href="?page=1" class="px-4 py-2 bg-gray-300 text-black rounded-lg hover:bg-gray-400">Primera</a>
+                <a href="?page={{ page_obj.previous_page_number }}" class="px-4 py-2 bg-gray-300 text-black rounded-lg hover:bg-gray-400">Anterior</a>
+            {% endif %}
+            <span class="mx-2 text-lg">Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="px-4 py-2 bg-gray-300 text-black rounded-lg hover:bg-gray-400">Siguiente</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}" class="px-4 py-2 bg-gray-300 text-black rounded-lg hover:bg-gray-400">Última</a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

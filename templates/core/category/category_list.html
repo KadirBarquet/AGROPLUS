@@ -1,0 +1,31 @@
+{% extends 'components/base.html' %}
+
+{% block title %}Lista de Categorías{% endblock %}
+
+{% block content %}
+    <div class="container mx-auto py-8 px-16">
+        <h1 class="text-3xl font-bold mb-6">Categorías</h1>
+        <a href="{% url 'catalog:category_create' %}" class="bg-green-600 text-white px-4 py-2 rounded mb-4 inline-block">Agregar Nueva Categoría</a>
+        <table class="min-w-full bg-white border border-gray-300">
+            <thead>
+                <tr class="border-b">
+                    <th class="py-2 px-4 text-left">Nombre</th>
+                    <th class="py-2 px-4 text-left">Descripción</th>
+                    <th class="py-2 px-4 text-left">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for category in categories %}
+                    <tr class="border-b">
+                        <td class="py-2 px-4">{{ category.name }}</td>
+                        <td class="py-2 px-4">{{ category.description }}</td>
+                        <td class="py-2 px-4">
+                            <a href="{% url 'catalog:category_update' category.pk %}" class="text-blue-600 hover:text-blue-800">Editar</a> |
+                            <a href="{% url 'catalog:category_delete' category.pk %}" class="text-red-600 hover:text-red-800">Eliminar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

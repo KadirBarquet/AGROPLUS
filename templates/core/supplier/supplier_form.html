@@ -1,0 +1,63 @@
+{% extends 'components/base.html' %}
+
+{% block title %}{% if form.instance.pk %}Editar Proveedor{% else %}Crear Nuevo Proveedor{% endif %}{% endblock %}
+
+{% block content %}
+    <div class="container mx-auto py-8 px-16">
+        <h1 class="text-3xl font-bold mb-6">{% if form.instance.pk %}Editar Proveedor{% else %}Crear Nuevo Proveedor{% endif %}</h1>
+
+        <form method="post" class="space-y-6">
+            {% csrf_token %}
+            
+            <!-- Nombre del Proveedor -->
+            <div class="mb-4">
+                <label for="{{ form.name.id_for_label }}" class="block text-lg font-medium">Nombre del Proveedor</label>
+                <input type="text" name="name" id="{{ form.name.id_for_label }}" value="{{ form.instance.name|default:'' }}" placeholder="Ingresa el nombre del proveedor" class="mt-1 block w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" required>
+                {% if form.name.errors %}
+                    <div class="text-red-500 text-sm mt-2">
+                        {% for error in form.name.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Correo Electrónico de Contacto -->
+            <div class="mb-4">
+                <label for="{{ form.contact_email.id_for_label }}" class="block text-lg font-medium">Correo Electrónico</label>
+                <input type="email" name="contact_email" id="{{ form.contact_email.id_for_label }}" value="{{ form.instance.contact_email|default:'' }}" placeholder="Ingresa el correo electrónico" class="mt-1 block w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500">
+                {% if form.contact_email.errors %}
+                    <div class="text-red-500 text-sm mt-2">
+                        {% for error in form.contact_email.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Teléfono de Contacto -->
+            <div class="mb-4">
+                <label for="{{ form.contact_phone.id_for_label }}" class="block text-lg font-medium">Teléfono</label>
+                <input type="text" name="contact_phone" id="{{ form.contact_phone.id_for_label }}" value="{{ form.instance.contact_phone|default:'' }}" placeholder="Ingresa el teléfono de contacto" class="mt-1 block w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500">
+                {% if form.contact_phone.errors %}
+                    <div class="text-red-500 text-sm mt-2">
+                        {% for error in form.contact_phone.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Botones de Acción -->
+            <div class="flex justify-between">
+                <!-- Botón de Guardar -->
+                <button type="submit" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-all">Guardar</button>
+
+                <!-- Botón de Cancelar -->
+                <a href="{% url 'catalog:supplier_list' %}" class="bg-gray-300 text-black px-6 py-2 rounded-lg hover:bg-gray-400 transition-all">
+                    Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

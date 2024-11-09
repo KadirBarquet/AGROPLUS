@@ -1,0 +1,15 @@
+{% extends 'components/base.html' %}
+
+{% block title %}Eliminar Categoría{% endblock %}
+
+{% block content %}
+    <div class="container mx-auto py-8 px-16">
+        <h1 class="text-3xl font-bold mb-6">Eliminar Categoría</h1>
+        <p>¿Estás seguro de que quieres eliminar la categoría "{{ object.name }}"?</p>
+        <form method="post" class="mt-4">
+            {% csrf_token %}
+            <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded">Eliminar</button>
+            <a href="{% url 'catalog:category_list' %}" class="ml-4 bg-gray-300 text-black px-4 py-2 rounded">Cancelar</a>
+        </form>
+    </div>
+{% endblock %}
